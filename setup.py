@@ -11,6 +11,7 @@ setup(
     python_requires=">=3.7",
     install_requires=[
         "Django>=2.2",
+        "django-ipware>=2.1"
     ],
     classifiers=[
         "Environment :: Web Environment",
