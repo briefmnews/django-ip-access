@@ -1,6 +1,9 @@
 -r requirements.txt
+Faker==2.0.1
 ipdb==0.12
 pytest==4.4.1
 pytest-cov==2.6.1
 pytest-django==3.4.8
+pytest-factoryboy==2.0.2
+pytest-mock==1.10.4
 pytest-pythonpath==0.7.3

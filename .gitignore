@@ -3,3 +3,6 @@
 *.pyc
 .pytest_cache
 django_ip_access.egg-info
+
+htmlcov
+.coverage
