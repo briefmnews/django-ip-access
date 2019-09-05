@@ -1,0 +1,14 @@
+language: python
+
+python:
+  - "3.7"
+
+install:
+  - pip install -r test_requirements.txt
+  - pip install codecov
+
+script:
+  - pytest --cov=django_ip_access tests
+
+after_success:
+  - codecov
