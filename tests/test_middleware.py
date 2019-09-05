@@ -28,7 +28,9 @@ class TestIpAccessMiddleware:
         ip_access_middleware = IpAccessMiddleware(request)
 
         # WHEN
-        mocker.patch("django_ip_access.middleware.get_client_ip", return_value=(ip.ip, False))
+        mocker.patch(
+            "django_ip_access.middleware.get_client_ip", return_value=(ip.ip, False)
+        )
         ip_access_middleware(request())
 
         # THEN
@@ -44,4 +46,3 @@ class TestIpAccessMiddleware:
 
         # THEN
         assert ip_access_middleware.get_response().path == "/"
-
