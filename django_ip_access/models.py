@@ -9,5 +9,9 @@ class IpAddress(models.Model):
     ip = models.GenericIPAddressField(unique=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = "Authorized IP address"
+        verbose_name_plural = "Authorized IP addresses"
+
     def __str__(self):
         return self.ip
