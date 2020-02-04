@@ -21,6 +21,6 @@ class IpAccessMiddleware:
         user = IpAccessBackend.authenticate(request, ip=ip)
 
         if user:
-            login(request, user)
+            login(request, user, backend='django_ip_access.backends.IpAccessBackend')
 
         return response
