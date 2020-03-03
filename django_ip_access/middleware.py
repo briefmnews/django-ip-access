@@ -14,7 +14,7 @@ class IpAccessMiddleware:
 
         response = self.get_response(request)
 
-        if request.user.is_authenticated:
+        if request.user and request.user.is_authenticated:
             return response
 
         ip, is_routable = get_client_ip(request)
