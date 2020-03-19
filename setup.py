@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="django-ip-access",
-    version="0.1.2",
+    version="0.1.3",
     description="Access a Django app with authorized IP address",
     url="https://github.com/briefmnews/django-ip-access",
     author="Brief.me",
