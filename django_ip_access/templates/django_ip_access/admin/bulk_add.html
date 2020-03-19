@@ -1,0 +1,15 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block title %}Bulk add {{ block.super }}{% endblock %}
+
+{% block content %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="hidden" name="{{ stage_field }}" value="1" />
+        <button class="btn btn-success" type="submit"><i class="icon-eye-open icon-white"></i> Submit</button>
+    </form>
+
+{% endblock %}

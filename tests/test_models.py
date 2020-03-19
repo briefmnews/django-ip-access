@@ -17,6 +17,6 @@ class TestIpAddress:
         # WHEN
         second_ip = IpAddress(user=user, ip=faker.ipv4())
         second_ip.save()
-        
+
         # THEN
         assert user.ipaddress_set.all().count() == 2
