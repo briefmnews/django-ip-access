@@ -20,5 +20,6 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
     ],
+    include_package_data=True,
     zip_safe=False,
 )
