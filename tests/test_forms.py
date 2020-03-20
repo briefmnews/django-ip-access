@@ -9,7 +9,7 @@ pytestmark = pytest.mark.django_db
 class TestEditIpAddressForm:
     def test_form_works(self, user):
         # GIVEN
-        ips = ["127.0.0.1", "127.0.0.2"]
+        ips = ["127.0.0.1", "127.0.0.2", "128.0.0.0/24"]
         data = {"ips": "\n".join(ips), "user": user.pk}
 
         # WHEN
@@ -18,7 +18,7 @@ class TestEditIpAddressForm:
         # THEN
         assert form.is_valid()
         form.save()
-        assert IpAddress.objects.filter(ip__in=ips).count() == 2
+        assert IpAddress.objects.all().count() == 256
 
     def test_form_with_wrong_ip_formatting(self, user):
         # GIVEN
