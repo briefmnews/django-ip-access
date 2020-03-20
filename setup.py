@@ -9,7 +9,7 @@ setup(
     author_email="tech@brief.me",
     packages=["django_ip_access", "django_ip_access.migrations"],
     python_requires=">=3.7",
-    install_requires=["Django>=2.2", "django-ipware>=2.1"],
+    install_requires=["Django>=2.2", "django-ipware>=2.1", "ipaddress>=1"],
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Django",
