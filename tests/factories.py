@@ -3,7 +3,7 @@ from faker import Faker
 
 from django.contrib.auth import get_user_model
 
-from django_ip_access.models import IpAddress
+from django_ip_access.models import EditIpAddress, IpAddress
 
 faker = Faker()
 
@@ -14,6 +14,11 @@ class UserFactory(factory.DjangoModelFactory):
 
     email = factory.Sequence(lambda n: "hubert{0}@delabatte.fr".format(n))
     username = email
+
+
+class EditIpAddressFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = EditIpAddress
 
 
 class IpAddressFactory(factory.DjangoModelFactory):

@@ -4,7 +4,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.test import RequestFactory
 
-from .factories import IpAddressFactory, UserFactory
+from .factories import EditIpAddressFactory, IpAddressFactory, UserFactory
 
 
 @pytest.fixture
@@ -14,8 +14,14 @@ def user():
 
 @pytest.fixture
 def ip():
-    user = UserFactory(email="fake-user@yahoo.fr", is_active=True)
+    user = UserFactory()
     return IpAddressFactory(user=user)
+
+
+@pytest.fixture
+def edit_ip():
+    user = UserFactory()
+    return EditIpAddressFactory(user=user)
 
 
 @pytest.fixture

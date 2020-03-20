@@ -1,9 +1,14 @@
 import pytest
 from faker import Faker
-from django_ip_access.models import IpAddress
+from django_ip_access.models import IpAddress, EditIpAddress
 
 faker = Faker()
 pytestmark = pytest.mark.django_db
+
+
+class TestEditIpAddress:
+    def test_str(self, edit_ip):
+        assert edit_ip.__str__() == str(edit_ip.user)
 
 
 class TestIpAddress:
