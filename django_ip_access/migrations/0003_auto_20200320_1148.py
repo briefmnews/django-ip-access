@@ -9,25 +9,43 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('django_ip_access', '0002_auto_20200204_1233'),
+        ("django_ip_access", "0002_auto_20200204_1233"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='EditIpAddress',
+            name="EditIpAddress",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('ips', models.TextField()),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("ips", models.TextField()),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Edit Authorized IP address',
-                'verbose_name_plural': 'Edit Authorized IP addresses',
+                "verbose_name": "Edit Authorized IP address",
+                "verbose_name_plural": "Edit Authorized IP addresses",
             },
         ),
         migrations.AddField(
-            model_name='ipaddress',
-            name='edit_ip_address',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='django_ip_access.EditIpAddress'),
+            model_name="ipaddress",
+            name="edit_ip_address",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="django_ip_access.EditIpAddress",
+            ),
         ),
     ]

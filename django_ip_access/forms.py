@@ -40,7 +40,9 @@ class EditIpAddressForm(forms.ModelForm):
         for ip in ips.split():
             try:
                 ip_address = IpAddress.objects.get(ip=ip)
-                raise ValidationError(_(f"{ip_address.ip} already exists for user {ip_address.user}."))
+                raise ValidationError(
+                    _(f"{ip_address.ip} already exists for user {ip_address.user}.")
+                )
             except IpAddress.DoesNotExist:
                 pass
 

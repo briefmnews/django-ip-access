@@ -37,7 +37,9 @@ class EditIpAddress(models.Model):
 
         ip_addresses_to_create = []
         for ip in ips_list:
-            ip_addresses_to_create.append(IpAddress(user=self.user, ip=ip, edit_ip_address=self))
+            ip_addresses_to_create.append(
+                IpAddress(user=self.user, ip=ip, edit_ip_address=self)
+            )
 
         IpAddress.objects.bulk_create(ip_addresses_to_create)
 
@@ -46,9 +48,7 @@ class IpAddress(models.Model):
     ip = models.GenericIPAddressField(unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     edit_ip_address = models.ForeignKey(
-        'EditIpAddress',
-        on_delete=models.CASCADE,
-        null=True
+        "EditIpAddress", on_delete=models.CASCADE, null=True
     )
 
     class Meta:
