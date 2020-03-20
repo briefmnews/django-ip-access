@@ -14,10 +14,11 @@ class EditIpAddressForm(forms.ModelForm):
         fields = "__all__"
 
     def clean_ips(self):
-        return self._get_cleaned_ips(self.cleaned_data.get("ips"))
+        return self._get_cleaned_ips()
 
-    @staticmethod
-    def _get_cleaned_ips(ips):
+    def _get_cleaned_ips(self):
+        ips = self.cleaned_data.get("ips")
+
         # Validate ips
         list_ips = []
 
@@ -39,7 +40,7 @@ class EditIpAddressForm(forms.ModelForm):
         # Remove existing ips from another user
         for ip in ips.split():
             try:
-                ip_address = IpAddress.objects.get(ip=ip)
+                ip_address = IpAddress.objects.exclude(edit_ip_address=self.instance or None).get(ip=ip)
                 raise ValidationError(
                     _(f"{ip_address.ip} already exists for user {ip_address.user}.")
                 )

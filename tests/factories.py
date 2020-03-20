@@ -20,9 +20,13 @@ class EditIpAddressFactory(factory.DjangoModelFactory):
     class Meta:
         model = EditIpAddress
 
+    user = factory.SubFactory(UserFactory)
+
 
 class IpAddressFactory(factory.DjangoModelFactory):
     class Meta:
         model = IpAddress
 
     ip = faker.ipv4()
+    edit_ip_address = factory.SubFactory(EditIpAddressFactory)
+    user = factory.SubFactory(UserFactory)
