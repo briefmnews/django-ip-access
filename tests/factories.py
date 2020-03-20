@@ -13,6 +13,7 @@ class UserFactory(factory.DjangoModelFactory):
         model = get_user_model()
 
     email = factory.Sequence(lambda n: "hubert{0}@delabatte.fr".format(n))
+    username = email
 
 
 class IpAddressFactory(factory.DjangoModelFactory):
