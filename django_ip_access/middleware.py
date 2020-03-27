@@ -12,10 +12,8 @@ class IpAccessMiddleware:
 
     def __call__(self, request):
 
-        response = self.get_response(request)
-
         if request.user and request.user.is_authenticated:
-            return response
+            return self.get_response(request)
 
         ip, is_routable = get_client_ip(request)
         user = IpAccessBackend.authenticate(request, ip=ip)
@@ -23,4 +21,4 @@ class IpAccessMiddleware:
         if user:
             login(request, user, backend="django_ip_access.backends.IpAccessBackend")
 
-        return response
+        return self.get_response(request)
