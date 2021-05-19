@@ -8,7 +8,7 @@ from django_ip_access.models import EditIpAddress, IpAddress
 faker = Faker()
 
 
-class UserFactory(factory.DjangoModelFactory):
+class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = get_user_model()
 
@@ -16,14 +16,14 @@ class UserFactory(factory.DjangoModelFactory):
     username = email
 
 
-class EditIpAddressFactory(factory.DjangoModelFactory):
+class EditIpAddressFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = EditIpAddress
 
     user = factory.SubFactory(UserFactory)
 
 
-class IpAddressFactory(factory.DjangoModelFactory):
+class IpAddressFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = IpAddress
 
