@@ -1,8 +1,10 @@
 from setuptools import setup
 
+from django_ip_access import __version__
+
 setup(
     name="django-ip-access",
-    version="1.0.0",
+    version=__version__,
     description="Access a Django app with authorized IP address",
     url="https://github.com/briefmnews/django-ip-access",
     author="Brief.me",
