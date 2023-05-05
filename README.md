@@ -1,6 +1,6 @@
 # django-ip-access
 [![Python 3.7](https://img.shields.io/badge/python-3.7|3.8|3.9-blue.svg)](https://www.python.org/downloads/release/python-270/) 
-[![Django 2.2](https://img.shields.io/badge/django-2.2-blue.svg)](https://docs.djangoproject.com/en/2.2/)
+[![Django 3.2](https://img.shields.io/badge/django-3.2-blue.svg)](https://docs.djangoproject.com/en/3.2/)
 [![codecov](https://codecov.io/gh/briefmnews/django-ip-access/branch/master/graph/badge.svg)](https://codecov.io/gh/briefmnews/django-ip-access)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 

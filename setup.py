@@ -11,11 +11,11 @@ setup(
     author_email="tech@brief.me",
     packages=["django_ip_access", "django_ip_access.migrations"],
     python_requires=">=3.7",
-    install_requires=["Django>=2.2", "django-ipware>=2.1", "ipaddress>=1"],
+    install_requires=["Django>=3.2", "django-ipware>=2.1", "ipaddress>=1"],
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Django",
-        "Framework :: Django :: 2.2",
+        "Framework :: Django :: 3.2",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
