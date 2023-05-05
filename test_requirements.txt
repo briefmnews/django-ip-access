@@ -1,4 +1,5 @@
 -r requirements.txt
+black==23.3.0
 Faker==18.6.2
 ipdb==0.13.13
 pytest==7.3.1
