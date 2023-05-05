@@ -11,7 +11,6 @@ class IpAccessMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-
         if request.user and request.user.is_authenticated:
             return self.get_response(request)
 
