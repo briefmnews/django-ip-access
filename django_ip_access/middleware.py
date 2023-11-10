@@ -1,7 +1,5 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from ipware import get_client_ip
-
-from .backends import IpAccessBackend
 
 
 class IpAccessMiddleware:
@@ -15,7 +13,7 @@ class IpAccessMiddleware:
             return self.get_response(request)
 
         ip, is_routable = get_client_ip(request)
-        user = IpAccessBackend.authenticate(request, ip=ip)
+        user = authenticate(request, ip=ip)
 
         if user:
             login(request, user, backend="django_ip_access.backends.IpAccessBackend")
