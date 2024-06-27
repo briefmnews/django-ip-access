@@ -1,4 +1,4 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import authenticate, login
 from ipware import get_client_ip
 
 

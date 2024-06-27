@@ -1,6 +1,7 @@
 import pytest
 from faker import Faker
-from django_ip_access.models import IpAddress, EditIpAddress
+
+from django_ip_access.models import EditIpAddress, IpAddress
 
 faker = Faker()
 pytestmark = pytest.mark.django_db

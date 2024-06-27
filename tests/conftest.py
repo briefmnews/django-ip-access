@@ -1,5 +1,4 @@
 import pytest
-
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.test import RequestFactory
