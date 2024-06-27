@@ -16,7 +16,7 @@ class TestEditIpAddress:
 
         # WHEN
         ips_list = edit_ip._generate_ips_list()
-        saved_ips = IpAddress.objects.filter(user=user).values_list('ip', flat=True)
+        saved_ips = IpAddress.objects.filter(user=user).values_list("ip", flat=True)
 
         # THEN
         assert set(saved_ips) == set(ips_list)
