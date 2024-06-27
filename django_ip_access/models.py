@@ -29,9 +29,9 @@ class EditIpAddress(models.Model):
         return ips_list
 
     def save(self, *args, **kwargs):
-        self.ipaddress_set.all().delete()
-
         super().save(*args, **kwargs)
+
+        self.ipaddress_set.all().delete()
 
         ips_list = self._generate_ips_list()
 
