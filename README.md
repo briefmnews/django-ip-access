@@ -11,7 +11,7 @@ Access a Django app with authorized IP address
 ## Installation
 Install with [pip](https://pip.pypa.io/en/stable/)
 ```shell script
-pip install -e git://github.com/briefmnews/django-ip-access.git@master#egg=django_ip_access
+pip install django-ip-access
 ```
 
 
