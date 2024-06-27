@@ -20,7 +20,7 @@ setup(
     license="GNU General Public License v3.0",
     packages=["django_ip_access", "django_ip_access.migrations"],
     python_requires=">=3.9",
-    install_requires=["Django>=4.2", "django-ipware>=5"],
+    install_requires=["Django>=4.2", "django-ipware>=2.1"],
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Django",
