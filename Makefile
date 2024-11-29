@@ -27,3 +27,6 @@ release_prod:
 	- rm -rf build && rm -rf dist && rm -rf *.egg-info
 	- python setup.py sdist bdist_wheel
 	- python -m twine upload dist/*
+
+bandit:
+	bandit -c pyproject.toml -r .

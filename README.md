@@ -4,6 +4,7 @@
 [![Python CI](https://github.com/briefmnews/django-ip-access/actions/workflows/workflow.yaml/badge.svg)](https://github.com/briefmnews/django-ip-access/actions/workflows/workflow.yaml)
 [![codecov](https://codecov.io/gh/briefmnews/django-ip-access/branch/master/graph/badge.svg)](https://codecov.io/gh/briefmnews/django-ip-access)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 
 Access a Django app with authorized IP address
 
