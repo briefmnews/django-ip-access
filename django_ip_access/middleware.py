@@ -1,8 +1,12 @@
+from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.core.cache import cache
 from ipware import get_client_ip
 
-from .settings import IP_ACCESS_CACHE_KEY_PREFIX, IP_ACCESS_CACHE_TTL
+IP_ACCESS_CACHE_KEY_PREFIX = getattr(
+    settings, "IP_ACCESS_CACHE_KEY_PREFIX", "ip_auth_"
+)
+IP_ACCESS_CACHE_TTL = getattr(settings, "IP_ACCESS_CACHE_TTL", 60)
 
 
 class IpAccessMiddleware:
