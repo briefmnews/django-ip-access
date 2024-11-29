@@ -14,39 +14,37 @@ class EditIpAddressForm(forms.ModelForm):
         fields = "__all__"
 
     def clean_ips(self):
-        return self._get_cleaned_ips()
-
-    def _get_cleaned_ips(self):
+        """
+        Cleans and validates the IPs field.
+        - Ensures each IP is well-formatted.
+        - Removes duplicates.
+        - Validates against existing IPs in the database.
+        """
         ips = self.cleaned_data.get("ips")
 
-        # Validate ips
-        list_ips = []
+        list_ips = ips.split()
 
-        for ip in ips.split():
+        # Validate formatting and collect unique IPs
+        unique_ips = set()
+        errors = []
+        for ip in list_ips:
             try:
-                ipaddress.ip_network(ip)
+                ipaddress.ip_network(ip)  # Validate IP format
+                unique_ips.add(ip)
             except ValueError:
-                raise ValidationError(_(f"{ip} is not well-formatted."))
+                errors.append(_(f"{ip} is not well-formatted."))
 
-            list_ips.append(ip)
-
-        # Remove duplicates
-        duplicate_ips = set(
-            [(ip, list_ips.count(ip)) for ip in list_ips if list_ips.count(ip) > 1]
+        # Check for existing IPs in the database
+        existing_ips = (
+            IpAddress.objects.exclude(edit_ip_address=self.instance or None)
+            .filter(ip__in=unique_ips)
+            .select_related("user")
         )
-        for ip, count in duplicate_ips:
-            ips = ips.replace(ip, "", count - 1)
+        for ip_entry in existing_ips:
+            errors.append(_(f"{ip_entry.ip} already exists for user {ip_entry.user}."))
+            unique_ips.discard(ip_entry.ip)
 
-        # Remove existing ips from another user
-        for ip in ips.split():
-            try:
-                ip_address = IpAddress.objects.exclude(
-                    edit_ip_address=self.instance or None
-                ).get(ip=ip)
-                raise ValidationError(
-                    _(f"{ip_address.ip} already exists for user {ip_address.user}.")
-                )
-            except IpAddress.DoesNotExist:
-                pass
+        if errors:
+            raise ValidationError(errors)
 
-        return ips.strip()
+        return "\n".join(sorted(unique_ips))
