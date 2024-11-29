@@ -12,3 +12,6 @@ INSTALLED_APPS = (
 )
 
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3"}}
+
+IP_ACCESS_CACHE_TTL = 60 * 5
+IP_ACCESS_CACHE_KEY_PREFIX = "ip_auth_"
