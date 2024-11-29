@@ -52,7 +52,7 @@ AUTHENTICATION_BACKENDS = (
 The optional settings with their default values:
 ```python
 IP_ACCESS_CACHE_KEY_PREFIX = "ip_auth_" # the cache key will be ip_auth_{ip}
-IP_ACCESS_CACHE_TTL = 60 * 5 # in seconds. 5 minutes in this example
+IP_ACCESS_CACHE_TTL = 60 # in seconds
 ```
 
 ### Migrations
