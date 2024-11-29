@@ -12,7 +12,7 @@ class IpAccessMiddleware:
         if request.user and request.user.is_authenticated:
             return self.get_response(request)
 
-        ip, is_routable = get_client_ip(request)
+        ip, _ = get_client_ip(request)
         cache_key = f"{settings.IP_ACCESS_CACHE_KEY_PREFIX}_{ip}"
 
         if not cache.get(cache_key):
