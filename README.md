@@ -48,20 +48,32 @@ AUTHENTICATION_BACKENDS = (
 )
 ```
 
+The optional settings with their default values:
+```python
+IP_ACCESS_CACHE_KEY_PREFIX = "ip_auth_" # the cache key will be ip_auth_{ip}
+IP_ACCESS_CACHE_TTL = 60 * 5 # in seconds. 5 minutes in this example
+```
+
 ### Migrations
 Next, you need to run the migrations in order to update your database schema.
 ```shell script
 python manage.py migrate
 ```
 
+### Cache
+Beware that `django-ip-access` relies on [Django's cache framework](https://docs.djangoproject.com/en/5.1/topics/cache/#django-s-cache-framework) 
+to avoid trying to authenticate unauthenticated users on each request.
+
 ## How to use ?
 Once you are all set up, when a request to your app is made, the `IpAccessMiddleware` checks
 for if the IP address of the request exists in the admin panel and
 if the user associated to the IP address is active.
 
+## Future work
+* Allow the middleware to only runs for specific routes. This would reduces unnecessary overhead for requests that don't require IP-based authentication.
 
 ## Tests
 Testing is managed by `pytest`. required packages for testing can be installed with:
 ```shell script
-pytest
+make install
 ```
