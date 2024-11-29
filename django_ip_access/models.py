@@ -23,7 +23,9 @@ class EditIpAddress(models.Model):
             try:
                 ips_list.append(str(ipaddress.ip_address(ip)))
             except ValueError:
-                ips_list += [str(el) for el in ipaddress.ip_network(ip).hosts()]
+                ips_list += [
+                    str(el) for el in ipaddress.ip_network(ip).hosts()
+                ]
 
         return ips_list
 

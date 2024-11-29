@@ -56,4 +56,6 @@ class TestEditIpAddressForm:
 
         # THEN
         assert not form.is_valid()
-        assert f"{ip.ip} already exists for user {ip.user}." in form.errors["ips"]
+        assert (
+            f"{ip.ip} already exists for user {ip.user}." in form.errors["ips"]
+        )

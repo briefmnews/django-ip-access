@@ -22,14 +22,17 @@ class TestIpAccessMiddleware:
 
         assert ip_access_middleware.get_response().path == "/"
 
-    def test_anonymous_user_with_existing_ip_address(self, ip, mocker, request_builder):
+    def test_anonymous_user_with_existing_ip_address(
+        self, ip, mocker, request_builder
+    ):
         # GIVEN
         request = request_builder.get
         ip_access_middleware = IpAccessMiddleware(request)
 
         # WHEN
         mocker.patch(
-            "django_ip_access.middleware.get_client_ip", return_value=(ip.ip, False)
+            "django_ip_access.middleware.get_client_ip",
+            return_value=(ip.ip, False),
         )
         ip_access_middleware(request())
 

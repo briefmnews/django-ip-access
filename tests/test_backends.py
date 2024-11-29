@@ -25,6 +25,8 @@ class TestIpAccessBackend:
 
     @staticmethod
     def test_authenticate_with_active_user(request_builder, ip):
-        user = IpAccessBackend.authenticate(request_builder.get(ip.user), ip=ip.ip)
+        user = IpAccessBackend.authenticate(
+            request_builder.get(ip.user), ip=ip.ip
+        )
 
         assert user

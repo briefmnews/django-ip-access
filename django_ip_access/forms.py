@@ -41,7 +41,9 @@ class EditIpAddressForm(forms.ModelForm):
             .select_related("user")
         )
         for ip_entry in existing_ips:
-            errors.append(_(f"{ip_entry.ip} already exists for user {ip_entry.user}."))
+            errors.append(
+                _(f"{ip_entry.ip} already exists for user {ip_entry.user}.")
+            )
             unique_ips.discard(ip_entry.ip)
 
         if errors:
