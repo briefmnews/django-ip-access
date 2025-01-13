@@ -1,12 +1,10 @@
+import fnmatch
+
 from django.conf import settings
 from django.contrib.auth import authenticate, login
-from django.core.cache import cache
 from ipware import get_client_ip
 
-IP_ACCESS_CACHE_KEY_PREFIX = getattr(
-    settings, "IP_ACCESS_CACHE_KEY_PREFIX", "ip_auth_"
-)
-IP_ACCESS_CACHE_TTL = getattr(settings, "IP_ACCESS_CACHE_TTL", 60)
+IP_ACCESS_URLS_WHITELIST = getattr(settings, "IP_ACCESS_URLS_WHITELIST", [])
 
 
 class IpAccessMiddleware:
@@ -17,18 +15,27 @@ class IpAccessMiddleware:
         if request.user and request.user.is_authenticated:
             return self.get_response(request)
 
-        ip, _ = get_client_ip(request)
-        cache_key = f"{IP_ACCESS_CACHE_KEY_PREFIX}_{ip}"
+        # Construct the full URL for matching
+        domain = request.get_host().split(":")[0]  # Remove the port if present
+        full_url = f"https://{domain}{request.path_info}"
 
-        if not cache.get(cache_key):
-            user = authenticate(request, ip=ip)
-            cache.set(cache_key, True, IP_ACCESS_CACHE_TTL)
-
-            if user:
-                login(
-                    request,
-                    user,
-                    backend="django_ip_access.backends.IpAccessBackend",
-                )
+        # Check for matching patterns
+        for pattern in IP_ACCESS_URLS_WHITELIST:
+            if fnmatch.fnmatch(full_url, pattern) or fnmatch.fnmatch(
+                request.path_info, pattern
+            ):
+                self._authenticate_user(request)
+                return self.get_response(request)
 
         return self.get_response(request)
+
+    @staticmethod
+    def _authenticate_user(request):
+        ip, _ = get_client_ip(request)
+        user = authenticate(request, ip=ip)
+        if user:
+            login(
+                request,
+                user,
+                backend="django_ip_access.backends.IpAccessBackend",
+            )
