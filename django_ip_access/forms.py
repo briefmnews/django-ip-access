@@ -35,11 +35,12 @@ class EditIpAddressForm(forms.ModelForm):
                 errors.append(_(f"{ip} is not well-formatted."))
 
         # Check for existing IPs in the database
-        existing_ips = (
-            IpAddress.objects.exclude(edit_ip_address=self.instance or None)
-            .filter(ip__in=unique_ips)
-            .select_related("user")
-        )
+        # Django 5+ rejects unsaved instances in related filters.
+        existing_ips = IpAddress.objects.filter(
+            ip__in=unique_ips
+        ).select_related("user")
+        if self.instance.pk is not None:
+            existing_ips = existing_ips.exclude(edit_ip_address=self.instance)
         for ip_entry in existing_ips:
             errors.append(
                 _(f"{ip_entry.ip} already exists for user {ip_entry.user}.")
