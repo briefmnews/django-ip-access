@@ -59,3 +59,17 @@ class TestEditIpAddressForm:
         assert (
             f"{ip.ip} already exists for user {ip.user}." in form.errors["ips"]
         )
+
+    def test_create_with_unsaved_instance_does_not_raise(self, user):
+        """Admin add view passes an unsaved EditIpAddress; Django 5 forbids
+        filtering related fields with unsaved instances."""
+        # GIVEN
+        data = {"ips": "10.0.0.1", "user": user.pk}
+
+        # WHEN
+        form = EditIpAddressForm(data=data)
+
+        # THEN
+        assert form.is_valid()
+        form.save()
+        assert IpAddress.objects.filter(ip="10.0.0.1", user=user).exists()
