@@ -19,7 +19,7 @@ setup(
     author_email="tech@brief.me",
     license="GNU General Public License v3.0",
     packages=["django_ip_access", "django_ip_access.migrations"],
-    python_requires=">=3.9",
+    python_requires=">=3.10",
     install_requires=["Django>=5.2", "django-ipware>=2.1"],
     classifiers=[
         "Environment :: Web Environment",
